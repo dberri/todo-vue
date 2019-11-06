@@ -11,6 +11,9 @@ export default {
   name: "app",
   components: {
     ToDo
+  },
+  mounted() {
+    this.$store.dispatch("loadFromLocalStorage");
   }
 };
 </script>

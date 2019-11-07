@@ -1,23 +1,54 @@
 <template>
   <div class="ToDo">
-    <header class="ToDo-header"></header>
+    <header class="ToDo-header">
+      <ToDoInput />
+    </header>
     <main class="ToDo-main">
-      <ul class="ToDo-list"></ul>
+      <ul class="ToDo-list">
+        <ToDoItem v-for="todo in todoList" :key="todo.id" v-bind="todo" />
+      </ul>
     </main>
     <footer class="ToDo-footer">
-      <a href="#" class="ToDo-link is-active">All</a>
-      <a href="#" class="ToDo-link">Completed</a>
-      <a href="#" class="ToDo-link">Not completed</a>
+      <a
+        @onclick.prevent="currentList = 'all'"
+        href="#"
+        class="ToDo-link is-active"
+      >
+        All
+      </a>
+      <a
+        @onclick.prevent="currentList = 'completed'"
+        href="#"
+        class="ToDo-link"
+      >
+        Completed
+      </a>
+      <a
+        @onclick.prevent="currentList = 'not_completed'"
+        href="#"
+        class="ToDo-link"
+      >
+        Not completed
+      </a>
     </footer>
   </div>
 </template>
 
 <script>
+import ToDoInput from "./ToDoInput";
+import ToDoItem from "./ToDoItem";
 export default {
   name: "ToDo",
 
-  data() {
-    return {};
+  components: {
+    ToDoInput,
+    ToDoItem
+  },
+
+  computed: {
+    todoList() {
+      return this.$store.state.todos;
+    }
   }
 };
 </script>

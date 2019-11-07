@@ -24,6 +24,10 @@ export default new Vuex.Store({
     TOGGLE(state, id) {
       const todo = state.todos.find(item => item.id === id);
       todo.done = !todo.done;
+    },
+
+    REMOVE(state, id) {
+      state.todos = state.todos.filter(item => item.id !== id);
     }
   },
 
@@ -39,6 +43,11 @@ export default new Vuex.Store({
 
     toggleTodo({ commit, dispatch }, id) {
       commit("TOGGLE", id);
+      dispatch("syncLocalStorage");
+    },
+
+    removeTodo({ commit, dispatch }, id) {
+      commit("REMOVE", id);
       dispatch("syncLocalStorage");
     },
 

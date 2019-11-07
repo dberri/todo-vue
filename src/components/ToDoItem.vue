@@ -1,7 +1,12 @@
 <template>
   <li class="ToDoItem">
     <label :for="`todo_${id}`">
-      <input type="checkbox" :id="`todo_${id}`" :checked="done" />
+      <input
+        type="checkbox"
+        :id="`todo_${id}`"
+        :checked="done"
+        @change="toggleTodo"
+      />
       <span class="ToDoItem-title">{{ todo }}</span>
     </label>
   </li>
@@ -23,6 +28,12 @@ export default {
     done: {
       type: Boolean,
       required: true
+    }
+  },
+
+  methods: {
+    toggleTodo() {
+      this.$store.dispatch("toggleTodo", this.id);
     }
   }
 };

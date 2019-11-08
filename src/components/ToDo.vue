@@ -10,23 +10,23 @@
     </main>
     <footer class="ToDo-footer">
       <a
-        @onclick.prevent="currentList = 'all'"
+        @click.prevent="isDone = null"
         href="#"
-        class="ToDo-link is-active"
+        :class="['ToDo-link', { 'is-active': isDone === null }]"
       >
         All
       </a>
       <a
-        @onclick.prevent="currentList = 'completed'"
+        @click.prevent="isDone = true"
         href="#"
-        class="ToDo-link"
+        :class="['ToDo-link', { 'is-active': isDone === true }]"
       >
         Completed
       </a>
       <a
-        @onclick.prevent="currentList = 'not_completed'"
+        @click.prevent="isDone = false"
         href="#"
-        class="ToDo-link"
+        :class="['ToDo-link', { 'is-active': isDone === false }]"
       >
         Not completed
       </a>
@@ -45,9 +45,20 @@ export default {
     ToDoItem
   },
 
+  data() {
+    return {
+      isDone: null
+    };
+  },
+
   computed: {
     todoList() {
-      return this.$store.state.todos;
+      return this.$store.state.todos.filter(todo => {
+        if (this.isDone !== null) {
+          return todo.done === this.isDone;
+        }
+        return true;
+      });
     }
   }
 };

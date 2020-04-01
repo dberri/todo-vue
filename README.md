@@ -1,6 +1,8 @@
 # todo-vue
 
-## [DEMO](https://vue-2do.netlify.com/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69f30ebf-4077-4015-8d91-5c131af633fa/deploy-status)](https://app.netlify.com/sites/vue-2do/deploys)
+
+## [DEMO](https://vue-2do.netlify.app/)
 
 ## Project setup
 ```
